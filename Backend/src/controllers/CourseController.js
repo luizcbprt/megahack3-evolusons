@@ -7,7 +7,26 @@ module.exports = {
         return res.json(courses);
     },
     async show( req, res) {
+        const id = req.params
+        
 
+       const idCourse =  await connection('courses')
+       .where(id)
+       .first()
+
+       return res.json({idCourse});
+
+    },
+    async showCategory( req, res){
+        const category = req.params;
+
+
+        const result = await connection('courses')
+        .where(category)
+        .select('*')
+        .first();
+
+        return res.json(result);
     },
     async create( req, res) {
     const { title, category, duration, body } = req.body
@@ -21,14 +40,14 @@ module.exports = {
         return res.json({message:'Curso ja existente!'})
     }
 
-     course = await connection('courses').insert({
+    course = await connection('courses').insert({
         title,
         category,
         duration,
         body,
     });
-
-    return res.json(course);
+    
+    return res.json({message:'curso cadastrado com sucesso!'});
 
 
 },
