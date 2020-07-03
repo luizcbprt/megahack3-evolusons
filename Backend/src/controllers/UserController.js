@@ -1,5 +1,6 @@
 const connection = require('../database/connection');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     async index( req, res) { 
@@ -29,16 +30,18 @@ module.exports = {
         return res.json({message:'Email ja cadastrado!'})
     }
 
-    user = await connection('users').insert({
-        email,
-        name,
-        category,
-        password,
-    });
-    
-    return res.json({message:'Usuário cadastrado com sucesso!'});
+    bcrypt.hash(password, 10, async ( errBcrypt, password ) => {
+        if(errBcrypt) { return res.status(500).json(`error:${errBcrypt}`)  }
 
-
+        user = await connection('users').insert({
+            email,
+            name,
+            category,
+            password,
+        });
+        
+        return res.json({message:'Usuário cadastrado com sucesso!'});
+        });
 },
     async delete( req, res ) {
 
@@ -52,11 +55,28 @@ module.exports = {
         const user = await connection('users')
         .where('email',email)
         .select('*')
-        .first();
-
+        .first()
+        console.log(user)
         if(!user){
             return res.json({message:'dados incorretos!'})
         }
+
+        const result = await bcrypt.compareSync(password, user.password) 
+
+        if ( result ) { 
+
+            const token = jwt.sign({
+                name: user.name,
+                isAdmin:user.isAdmin,
+                id: user.id,
+            }, jwt_token, {
+                expiresIn: "1h"
+            })
+
+            return res.status(200).send({messagem:'autenticação efetuada com sucesso!', token:token});
+        }
+
+        
 
 
 
