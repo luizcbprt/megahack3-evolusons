@@ -1,5 +1,6 @@
 const connection = require('../database/connection');
 const jwt = require('jsonwebtoken');
+const jwt_token = 'suehtam';
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -19,7 +20,7 @@ module.exports = {
 
     },
     async create( req, res) {
-    const { email, name, category, password } = req.body
+    const { email, name, category, password, number } = req.body
     
     let user = await connection('users')
     .where("email",email)
@@ -38,6 +39,7 @@ module.exports = {
             name,
             category,
             password,
+            number
         });
         
         return res.json({message:'Usuário cadastrado com sucesso!'});
@@ -56,25 +58,43 @@ module.exports = {
         .where('email',email)
         .select('*')
         .first()
-        console.log(user)
+        console.log(password)
+
+
         if(!user){
             return res.json({message:'dados incorretos!'})
         }
+        await bcrypt.compare(password , user.password, async function(err, result){
+            if(err){
+                console.log(err)
+                return res.json({message:'erro na autenticação'})
+            }
+            //console.log(user)
+            const ids = user.id+'0000'
+            console.log(ids)
+            if ( result ) { 
 
-        const result = await bcrypt.compareSync(password, user.password) 
+                bcrypt.hash(ids, 10, async (err, id) => {
+                if(err){
+                    console.log(err);
+                    return res.json({message:'erro na autenticação, tente novamente mais tarde!'})
+                }
+                const token = jwt.sign({
+                    id:id,
+                }, jwt_token, {
+                    expiresIn: "1h"
+                })
 
-        if ( result ) { 
+                return res.status(200).json({messagem:'autenticação efetuada com sucesso!', token});
+               });
 
-            const token = jwt.sign({
-                name: user.name,
-                isAdmin:user.isAdmin,
-                id: user.id,
-            }, jwt_token, {
-                expiresIn: "1h"
-            })
+               
+            }
 
-            return res.status(200).send({messagem:'autenticação efetuada com sucesso!', token:token});
-        }
+
+
+        } )
+        
 
         
 

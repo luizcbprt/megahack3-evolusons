@@ -1,8 +1,7 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('categories', function (t) {
-        t.increments();
-        t.string('title').notNullable();
+        t.string('title').notNullable().primary();
       });
 };
 

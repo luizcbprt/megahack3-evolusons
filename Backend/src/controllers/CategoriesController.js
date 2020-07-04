@@ -6,17 +6,6 @@ module.exports = {
         const categories = await connection('categories').select("*");
         return res.json(categories);
     },
-    async show( req, res) {
-        const id = req.params
-        
-
-       const idCategory =  await connection('categories')
-       .where(id)
-       .first()
-
-       return res.json(idCategory);
-
-    },
     async create( req, res) {
     const { title } = req.body
     
@@ -35,7 +24,7 @@ module.exports = {
     return res.json({message:'Categoria cadastrada com sucesso!'});
 
 
-},
+    },
     async delete( req, res ) {
 
     },

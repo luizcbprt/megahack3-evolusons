@@ -1,9 +1,9 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('courses', function (t) {
-        t.increments()
+        t.increments('id');
         t.string('title').notNullable();
-        
+        t.string('point').defaultTo(0);
         t.string('category')
         .notNullable()
         .references('title')

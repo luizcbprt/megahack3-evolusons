@@ -8,7 +8,6 @@ const CategoriesController = require('./controllers/CategoriesController');
 //categories
 routes.post('/categories', CategoriesController.create) // cadastro
 routes.get('/categories', CategoriesController.index);// listagem de todos
-routes.get('/categories/:id', CategoriesController.show) // listagem por id
 
 // users
 routes.post('/users', UserController.create) // cadastro
