@@ -70,8 +70,7 @@ module.exports = {
                 return res.json({message:'erro na autenticação'})
             }
             //console.log(user)
-            const ids = user.id+'0000'
-            console.log(ids)
+            const ids = user.id+'0'
             if ( result ) { 
 
                 bcrypt.hash(ids, 10, async (err, id) => {

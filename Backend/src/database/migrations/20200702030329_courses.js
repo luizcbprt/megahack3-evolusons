@@ -9,7 +9,7 @@ exports.up = function(knex) {
         .references('title')
         .inTable('categories');
 
-        t.string('duration').notNullable();
+        t.time('duration', 10).notNullable();
         t.string('body').notNullable();
       });
 };
