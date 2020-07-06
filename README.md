@@ -12,10 +12,10 @@ Dependências Utilizadas no Backend:
 * ->Helmet
 * ->Jasonwebtoken
 * ->KnexJs
-* ->Sqlite (Banco Dados)
+* ->Sqlite3 (Banco Dados)
 ________________________________________________________________________________________________
 Front-End:
-React Native
+React Native ( mobile )
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++
