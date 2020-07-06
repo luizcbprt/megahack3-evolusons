@@ -18,7 +18,7 @@ Front-End:
 React Native
 
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++
 Equipe: Confra Conders -- Time 25
 - Ana Karla dos Anjos Ribeiro - UX/UI - http://abre.ai/beqk 
 - Francisco Jeová Pereira Júnior - Dados - http://abre.ai/beqi
