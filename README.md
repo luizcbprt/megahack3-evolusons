@@ -6,13 +6,13 @@ App Desenvolvido para facilitar os estudos dos colaboradores embarcados com sist
 _________________________________________________________________________________________________
 Dependências Utilizadas no Backend:
 
-->Bcrypt
-->Cors
-->Express
-->Helmet
-->Jasonwebtoken
-->KnexJs
-->Sqlite (Banco Dados)
+*->Bcrypt
+*->Cors
+*->Express
+*->Helmet
+*->Jasonwebtoken
+*->KnexJs
+*->Sqlite (Banco Dados)
 ________________________________________________________________________________________________
 Front-End:
 React Native
