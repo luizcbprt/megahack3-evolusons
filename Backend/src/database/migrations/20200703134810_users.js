@@ -10,6 +10,7 @@ exports.up = function(knex) {
         t.string('password').notNullable();
         t.integer('points').defaultTo(0);
         t.string('number').notNullable();
+        t.number('level').notNullable().defaultTo(0);
         
       });
 };
